@@ -1,75 +1,118 @@
-# Operations Research — Assignment 1
+# Operations Research – Assignment 1
 
-This repository contains the Python implementations for Assignment 1.
+This repository contains the two Python programs prepared for Operations Research Assignment 1.
 
-## 1. Big-M Method
+## 1. Big-M Method — Stigler Diet Problem
 
-**File:** `big_m_assignment.py`
+The first case study is the **Stigler Diet Problem**, a classical linear-programming problem first formulated by George Stigler. The objective is to choose a minimum-cost combination of foods that satisfies the required daily amounts of nine nutrients.
 
-The program solves a constrained linear programming maximization problem using the **Big-M Simplex Method**.
+This version uses the standard reduced 9-food data set:
 
-### Model
+- Wheat Flour
+- Evaporated Milk
+- Cheddar Cheese
+- Beef Liver
+- Cabbage
+- Spinach
+- Sweet Potatoes
+- Lima Beans
+- Navy Beans
 
-Maximize
+All nine nutrient requirements are `>=` constraints. Therefore the standard-form model contains a **surplus variable and an artificial variable for every constraint**. The program solves the model using the **Big-M Simplex Method**.
 
-`Z = 66x1 + 25x2 + 38x3`
+### Main result
 
-Subject to:
+Minimum daily cost:
 
-- `2x1 + x2 + 3x3 <= 64`
-- `x1 + 2x2 + 2x3 >= 50`
-- `3x1 + 2x2 + x3 = 58`
-- `x1, x2, x3 >= 0`
+`$0.10866228`
 
-The program prints the simplex iterations, entering/leaving variables, final decision variables, objective value, and constraint checks.
+Minimum annual cost:
 
-**Optimal solution:** `x1 = 10, x2 = 8, x3 = 12`
+`$39.6617`
 
-**Maximum profit:** `1316`
+The non-zero food expenditure variables are:
+
+| Food | Daily expenditure |
+|---|---:|
+| Wheat Flour | 0.02951906 |
+| Beef Liver | 0.00189256 |
+| Cabbage | 0.01121444 |
+| Spinach | 0.00500766 |
+| Navy Beans | 0.06102856 |
+
+The final artificial variables are zero and all nine nutrient requirements are satisfied.
 
 ## 2. Transportation Problem — VAM + MODI
 
-**File:** `transportation_vam_modi.py`
-
-The transportation problem has four sources and five destinations. The program first constructs an initial basic feasible solution using **Vogel's Approximation Method (VAM)** and then applies the **MODI (u-v) method** to test optimality and improve the allocation when necessary.
+The second case study is the **classical Hitchcock transportation model**: a balanced minimum-cost transportation problem in which supply points have to send a common product to demand points.
 
 ### Supply
 
-`S1=40, S2=30, S3=50, S4=20`
+| Source | Supply |
+|---|---:|
+| S1 | 40 |
+| S2 | 30 |
+| S3 | 50 |
 
 ### Demand
 
-`D1=20, D2=30, D3=25, D4=35, D5=30`
+| Destination | Demand |
+|---|---:|
+| D1 | 25 |
+| D2 | 30 |
+| D3 | 20 |
+| D4 | 45 |
 
-### Unit transportation costs
+Total supply = total demand = `120`.
 
-|     | D1 | D2 | D3 | D4 | D5 |
-|-----|---:|---:|---:|---:|---:|
-| S1  | 6 | 8 | 10 | 9 | 7 |
-| S2  | 9 | 11 | 8 | 7 | 12 |
-| S3  | 10 | 7 | 12 | 8 | 9 |
-| S4  | 8 | 9 | 6 | 10 | 11 |
+### Unit transportation cost
 
-The program prints the VAM initial allocation, MODI potentials/reduced costs, improvement iterations when required, and the final shipment plan.
+| Source / Destination | D1 | D2 | D3 | D4 |
+|---|---:|---:|---:|---:|
+| S1 | 14 | 11 | 6 | 14 |
+| S2 | 14 | 8 | 6 | 4 |
+| S3 | 14 | 1 | 4 | 7 |
 
-**Final transportation cost:** `975`
+The program first finds an initial basic feasible solution using **Vogel's Approximation Method (VAM)**. The resulting solution is then tested using the **MODI (u-v) method**. Negative reduced costs are used to select an entering cell, a closed loop is constructed, and the allocation is improved until every reduced cost is non-negative.
+
+### Main result
+
+Initial VAM transportation cost:
+
+`725`
+
+Final optimal transportation cost:
+
+`715`
+
+Final shipment plan:
+
+```text
+[[25,  0, 15,  0],
+ [ 0,  0,  0, 30],
+ [ 0, 30,  5, 15]]
+```
+
+## Files
+
+- `big_m_stigler.py` — Big-M implementation for the Stigler Diet Problem
+- `transportation_vam_modi.py` — VAM + MODI implementation for the transportation problem
 
 ## Requirements
 
-- Python 3
-- NumPy
+Python 3 and NumPy.
 
-Install NumPy with:
+Install NumPy:
 
 ```bash
 pip install numpy
 ```
 
-## Running
+Run the programs:
 
 ```bash
-python big_m_assignment.py
+python big_m_stigler.py
 python transportation_vam_modi.py
 ```
 
-The assignment report/PDF should contain the problem formulation, relevant algorithm steps, source code, and corresponding program output as required by the course instructions.
+The assignment PDF should contain the problem statement, mathematical formulation, standard-form conversion, relevant method calculations, source code, and the corresponding program output.
