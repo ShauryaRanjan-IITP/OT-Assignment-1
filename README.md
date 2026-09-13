@@ -7,7 +7,7 @@ The assignment covers two standard Operations Research models:
 1. **Big-M Simplex Method** applied to the reduced 9-food **Stigler Diet Problem**.
 2. **Vogel's Approximation Method (VAM)** followed by **MODI** for a balanced transportation problem.
 
-The main algorithms are implemented directly with NumPy rather than through a ready-made optimization model. Additional scripts are included only for **independent verification, regression testing, and visualization**.
+The main algorithms are implemented directly with NumPy rather than through a ready-made optimization model. Additional scripts are included only for **independent verification, regression testing, visualization, and reproducible notebook-based execution**.
 
 ---
 
@@ -150,7 +150,25 @@ The generated figures are intentionally kept out of version control so the repos
 
 ---
 
-## 6. Files
+## 6. Jupyter Notebook Demonstration
+
+`OR_Assignment_1_Demo.ipynb` provides a single reproducible workflow for the project. It runs the existing Big-M and VAM-MODI programs, performs the independent SciPy verification, runs the regression tests, and generates/displays the Matplotlib figures.
+
+The notebook calls the existing Python programs rather than copying their algorithms, so the main implementations remain the single source of truth.
+
+### Run the notebook
+
+After installing the requirements, start Jupyter with:
+
+```bash
+jupyter notebook OR_Assignment_1_Demo.ipynb
+```
+
+The notebook can also be opened in JupyterLab or another compatible Jupyter environment. Its cells include saved outputs from a checked run so that the computational workflow can be inspected directly from the repository.
+
+---
+
+## 7. Files
 
 | File | Purpose |
 |---|---|
@@ -159,12 +177,13 @@ The generated figures are intentionally kept out of version control so the repos
 | `verify_results.py` | Independent LP verification using SciPy |
 | `test_cases.py` | Regression tests for the two main programs |
 | `visualize_results.py` | Matplotlib result visualizations |
+| `OR_Assignment_1_Demo.ipynb` | Reproducible Jupyter workflow combining execution, verification, testing, and visualization |
 | `requirements.txt` | Python package requirements |
 | `outputs/` | Local generated figures (created by `visualize_results.py`) |
 
 ---
 
-## 7. Requirements
+## 8. Requirements
 
 Python 3.10+ is recommended.
 
@@ -174,9 +193,11 @@ Install the required packages:
 pip install -r requirements.txt
 ```
 
+This installs NumPy for numerical operations, SciPy for independent LP verification, Matplotlib for figures, and Jupyter Notebook for the reproducible notebook workflow.
+
 ---
 
-## 8. Running the Project
+## 9. Running the Project
 
 Run the two assignment implementations:
 
@@ -201,6 +222,12 @@ Create the visualizations:
 
 ```bash
 python visualize_results.py
+```
+
+Or run the complete demonstration through:
+
+```bash
+jupyter notebook OR_Assignment_1_Demo.ipynb
 ```
 
 The algorithms remain independent of SciPy; SciPy is used only for the additional verification step.
