@@ -164,7 +164,7 @@ After installing the requirements, start Jupyter with:
 jupyter notebook OR_Assignment_1_Demo.ipynb
 ```
 
-The notebook can also be opened in JupyterLab or another compatible Jupyter environment. Its cells include saved outputs from a checked run so that the computational workflow can be inspected directly from the repository.
+The notebook can also be opened in JupyterLab or another compatible Jupyter environment. Its execution cells contain checked textual results, and the visualization cells regenerate the figures from the repository scripts when the notebook is run.
 
 ---
 
